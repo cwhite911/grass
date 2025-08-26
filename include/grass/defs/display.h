@@ -103,10 +103,10 @@ void D_dots(void);
 void D_plot_icon(double, double, int, double, double);
 
 /* raster.c */
-int D_draw_raster(int, const void *, struct Colors *, RASTER_MAP_TYPE);
-int D_draw_d_raster(int, const DCELL *, struct Colors *);
-int D_draw_f_raster(int, const FCELL *, struct Colors *);
-int D_draw_c_raster(int, const CELL *, struct Colors *);
+int D_draw_raster(int, const void *, struct Colors *, RASTER_MAP_TYPE, double);
+int D_draw_d_raster(int, const DCELL *, struct Colors *, double);
+int D_draw_f_raster(int, const FCELL *, struct Colors *, double);
+int D_draw_c_raster(int, const CELL *, struct Colors *, double);
 void D_raster_draw_begin(void);
 int D_draw_raster_RGB(int, const void *, const void *, const void *,
                       struct Colors *, struct Colors *, struct Colors *,

@@ -1,5 +1,5 @@
 /* display.c */
-int display(const char *, int, char *, RASTER_MAP_TYPE, int);
+int display(const char *, int, char *, RASTER_MAP_TYPE, int, double);
 int mask_raster_array(void *, int, int, RASTER_MAP_TYPE);
 
 /* main.c */

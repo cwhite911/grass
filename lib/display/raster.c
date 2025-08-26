@@ -25,7 +25,8 @@ extern int D__overlay_mode;
 static int src[2][2];
 static double dst[2][2];
 
-static int draw_cell(int, const void *, struct Colors *, RASTER_MAP_TYPE);
+static int draw_cell(int, const void *, struct Colors *, RASTER_MAP_TYPE,
+                     double);
 
 /*!
   \brief Draw raster row
@@ -49,9 +50,9 @@ static int draw_cell(int, const void *, struct Colors *, RASTER_MAP_TYPE);
   \return -1 nothing to draw (on error or end of raster)
 */
 int D_draw_raster(int A_row, const void *array, struct Colors *colors,
-                  RASTER_MAP_TYPE data_type)
+                  RASTER_MAP_TYPE data_type, double opacity)
 {
-    return draw_cell(A_row, array, colors, data_type);
+    return draw_cell(A_row, array, colors, data_type, opacity);
 }
 
 /*!
@@ -63,9 +64,10 @@ int D_draw_raster(int A_row, const void *array, struct Colors *colors,
 
   \return
 */
-int D_draw_d_raster(int A_row, const DCELL *darray, struct Colors *colors)
+int D_draw_d_raster(int A_row, const DCELL *darray, struct Colors *colors,
+                    double opacity)
 {
-    return draw_cell(A_row, darray, colors, DCELL_TYPE);
+    return draw_cell(A_row, darray, colors, DCELL_TYPE, opacity);
 }
 
 /*!
@@ -78,9 +80,10 @@ int D_draw_d_raster(int A_row, const DCELL *darray, struct Colors *colors)
   \return row number needed for next pixel row
   \return -1 nothing to draw (on error or end of raster)
 */
-int D_draw_f_raster(int A_row, const FCELL *farray, struct Colors *colors)
+int D_draw_f_raster(int A_row, const FCELL *farray, struct Colors *colors,
+                    double opacity)
 {
-    return draw_cell(A_row, farray, colors, FCELL_TYPE);
+    return draw_cell(A_row, farray, colors, FCELL_TYPE, opacity);
 }
 
 /*!
@@ -101,13 +104,14 @@ int D_draw_f_raster(int A_row, const FCELL *farray, struct Colors *colors)
   \return row number needed for next pixel row
   \return -1 nothing to draw (on error or end of raster)
 */
-int D_draw_c_raster(int A_row, const CELL *carray, struct Colors *colors)
+int D_draw_c_raster(int A_row, const CELL *carray, struct Colors *colors,
+                    double opacity)
 {
-    return draw_cell(A_row, carray, colors, CELL_TYPE);
+    return draw_cell(A_row, carray, colors, CELL_TYPE, opacity);
 }
 
 static int draw_cell(int A_row, const void *array, struct Colors *colors,
-                     RASTER_MAP_TYPE data_type)
+                     RASTER_MAP_TYPE data_type, double opacity)
 {
     static unsigned char *red, *grn, *blu, *set;
     static int nalloc;
@@ -124,6 +128,16 @@ static int draw_cell(int A_row, const void *array, struct Colors *colors,
     }
 
     Rast_lookup_colors(array, red, grn, blu, set, ncols, colors, data_type);
+
+    double bg_r, bg_g, bg_b = 255.0;
+
+    for (i = 0; i < ncols; i++) {
+        if (set[i])
+            continue; // skip nulls
+        red[i] = (unsigned char)(opacity * red[i] + (1.0 - opacity) * bg_r);
+        grn[i] = (unsigned char)(opacity * grn[i] + (1.0 - opacity) * bg_g);
+        blu[i] = (unsigned char)(opacity * blu[i] + (1.0 - opacity) * bg_b);
+    }
 
     if (D__overlay_mode)
         for (i = 0; i < ncols; i++) {

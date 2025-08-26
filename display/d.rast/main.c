@@ -43,6 +43,7 @@ int main(int argc, char **argv)
     struct Option *map;
     struct Option *vallist;
     struct Option *bg;
+    struct Option *opacity;
     struct Flag *flag_n;
     struct Flag *flag_i;
 
@@ -76,6 +77,15 @@ int main(int argc, char **argv)
     bg->label = _("Background color (for null)");
     bg->guisection = _("Null cells");
 
+    opacity = G_define_option();
+    opacity->key = "opacity";
+    opacity->type = TYPE_DOUBLE;
+    opacity->required = NO;
+    opacity->answer = "1.0";
+    opacity->description =
+        _("Opacity of the raster layer (0.0=transparent, 1.0=opaque)");
+    opacity->guisection = _("Display");
+
     flag_n = G_define_flag();
     flag_n->key = 'n';
     flag_n->description = _("Make null cells opaque");
@@ -93,6 +103,13 @@ int main(int argc, char **argv)
     overlay = !flag_n->answer;
     invert = flag_i->answer;
 
+    double opacity_value = 1.0;
+    if (opacity->answer)
+        opacity_value = atof(opacity->answer);
+    if (opacity_value < 0.0 || opacity_value > 1.0) {
+        G_fatal_error(_("Opacity must be between 0.0 and 1.0"));
+    }
+
     D_open_driver();
 
     fp = Rast_map_is_fp(name, "");
@@ -104,7 +121,8 @@ int main(int argc, char **argv)
     }
 
     /* use DCELL even if the map is FCELL */
-    display(name, overlay, bg->answer, fp ? DCELL_TYPE : CELL_TYPE, invert);
+    display(name, overlay, bg->answer, fp ? DCELL_TYPE : CELL_TYPE, invert,
+            opacity_value);
 
     D_save_command(G_recreate_command());
     D_close_driver();

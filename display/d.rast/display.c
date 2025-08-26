@@ -9,10 +9,11 @@
 #include "mask.h"
 #include "local_proto.h"
 
-static int cell_draw(const char *, struct Colors *, int, int, RASTER_MAP_TYPE);
+static int cell_draw(const char *, struct Colors *, int, int, RASTER_MAP_TYPE,
+                     double);
 
 int display(const char *name, int overlay, char *bg, RASTER_MAP_TYPE data_type,
-            int invert)
+            int invert, double opacity)
 {
     struct Colors colors;
     int r, g, b;
@@ -29,7 +30,7 @@ int display(const char *name, int overlay, char *bg, RASTER_MAP_TYPE data_type,
     }
 
     /* Go draw the raster map */
-    cell_draw(name, &colors, overlay, invert, data_type);
+    cell_draw(name, &colors, overlay, invert, data_type, opacity);
 
     /* release the colors now */
     Rast_free_colors(&colors);
@@ -38,7 +39,7 @@ int display(const char *name, int overlay, char *bg, RASTER_MAP_TYPE data_type,
 }
 
 static int cell_draw(const char *name, struct Colors *colors, int overlay,
-                     int invert, RASTER_MAP_TYPE data_type)
+                     int invert, RASTER_MAP_TYPE data_type, double opacity)
 {
     int cellfile;
     void *xarray;
@@ -68,7 +69,8 @@ static int cell_draw(const char *name, struct Colors *colors, int overlay,
         mask_raster_array(xarray, ncols, invert, data_type);
 
         /* Draw the cell row, and get the next row number */
-        cur_A_row = D_draw_raster(cur_A_row, xarray, colors, data_type);
+        cur_A_row =
+            D_draw_raster(cur_A_row, xarray, colors, data_type, opacity);
     }
     D_raster_draw_end();
 
