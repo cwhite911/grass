@@ -76,6 +76,7 @@ def setup_vector_with_values(tmp_path_factory):
     [
         ("int", [2.8, 4.6, 6.4, 8.2]),  # Equal interval over range 1-10
         ("qua", [3.0, 5.0, 7.0, 9.0]),  # Quantiles on 10 values
+        ("jen", [2.0, 4.0, 6.0, 8.0]),  # Natural breaks: equal-size classes
     ],
 )
 def test_v_class_break_values(setup_vector_with_values, algorithm, expected):
@@ -358,6 +359,53 @@ def test_v_class_large_dataset(tmp_path):
         assert all(1 <= b <= 100 for b in breaks)
 
 
+def test_v_class_jenks_clustered_values(setup_vector_with_values):
+    """
+    Test that the Jenks algorithm finds the natural gaps in clustered data.
+
+    Values 1, 2, 3, 11, 12, 13, 101, 102, 103 have two clear gaps; the
+    optimal breaks for 3 classes are the last members of the first two
+    clusters. Reference breaks confirmed with jenkspy 0.4.1.
+    """
+    session = setup_vector_with_values
+    values = [1, 2, 3, 11, 12, 13, 101, 102, 103]
+    sql_statements = "\n".join(
+        f"UPDATE test_points SET value = {val} WHERE cat = {cat};"
+        for cat, val in zip(range(1, 10), values, strict=False)
+    )
+    gs.write_command(
+        "db.execute",
+        input="-",
+        stdin=sql_statements.encode("utf-8"),
+        env=session.env,
+    )
+
+    output = gs.read_command(
+        "v.class",
+        map="test_points",
+        column="value",
+        where="cat <= 9",
+        algorithm="jen",
+        nbclasses=3,
+        flags="b",
+        env=session.env,
+    )
+    breaks = [float(b) for b in output.strip().split(",")]
+    assert breaks == pytest.approx([3.0, 13.0])
+
+    # Restore the fixture values for the other tests.
+    sql_statements = "\n".join(
+        f"UPDATE test_points SET value = {cat} WHERE cat = {cat};"
+        for cat in range(1, 11)
+    )
+    gs.write_command(
+        "db.execute",
+        input="-",
+        stdin=sql_statements.encode("utf-8"),
+        env=session.env,
+    )
+
+
 def test_v_class_output_format_consistency(setup_vector_with_values):
     """
     Test that the output of `v.class` is always a comma-separated list of floats.
@@ -365,7 +413,7 @@ def test_v_class_output_format_consistency(setup_vector_with_values):
     Checks this for all supported algorithms.
     """
     session = setup_vector_with_values
-    for algorithm in ["int", "std", "qua", "equ", "dis"]:
+    for algorithm in ["int", "std", "qua", "equ", "dis", "jen"]:
         output = gs.read_command(
             "v.class",
             map="test_points",

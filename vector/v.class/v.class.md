@@ -6,10 +6,10 @@ including several columns, all in the table linked to the vector map.
 The user indicates the number of classes desired and the algorithm to
 use for classification. Several algorithms are implemented for
 classification: equal interval, standard deviation, quantiles, equal
-probabilities, and a discontinuities algorithm developed by Jean-Pierre
-Grimmeau at the Free University of Brussels (ULB). It can be used to
-pipe class breaks into thematic mapping modules such as
-*d.vect.thematic* (see example below);
+probabilities, a discontinuities algorithm developed by Jean-Pierre
+Grimmeau at the Free University of Brussels (ULB), and Jenks natural
+breaks. It can be used to pipe class breaks into thematic mapping
+modules such as *d.vect.thematic* (see example below);
 
 ## NOTES
 
@@ -52,6 +52,19 @@ classes are different from those obtained by simply distributing the sum
 of their frequencies amongst them in proportion to the class amplitudes.
 In the GRASS implementation, the algorithm continues, but a warning is
 printed.
+
+The *Jenks natural breaks* algorithm finds the partition of the values
+into classes which minimizes the sum of the within-class variances (also
+known as Fisher-Jenks optimization or optimal univariate k-means). The
+result is the exact optimum, computed with a dynamic programming
+algorithm that runs in time proportional to the number of classes times
+n log n, parallelized with OpenMP (**nprocs**). The reported goodness of
+variance fit is `1 - SSD(classified) / SSD(unclassified)`; values close
+to 1 indicate that the classes explain most of the variance. Each break
+is a value from the data, and a value belongs to the class whose break
+is the smallest break greater than or equal to it. If there are fewer
+distinct values than requested classes, the number of classes is
+reduced.
 
 The **-g** flag has been renamed to the **-b** flag. Please use the **-b**
 flag to print class breaks. Support for using the **-g** flag for class
@@ -175,7 +188,8 @@ The JSON output looks like:
 
 ## SEE ALSO
 
-*[v.univar](v.univar.md), [d.vect.thematic](d.vect.thematic.md)*
+*[d.vect.thematic](d.vect.thematic.md), [r.class.breaks](r.class.breaks.md),
+[v.univar](v.univar.md)*
 
 ## AUTHOR
 

@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 {
     struct GModule *module;
     struct Option *map_opt, *field_opt, *col_opt, *where_opt;
-    struct Option *algo_opt, *nbclass_opt, *sep, *format_opt;
+    struct Option *algo_opt, *nbclass_opt, *sep, *format_opt, *nprocs_opt;
     struct Flag *breaks_flag;
     struct Map_info Map;
     struct field_info *Fi;
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     algo_opt->type = TYPE_STRING;
     algo_opt->required = YES;
     algo_opt->multiple = NO;
-    algo_opt->options = "int,std,qua,equ,dis";
+    algo_opt->options = "int,std,qua,equ,dis,jen";
     algo_opt->description = _("Algorithm to use for classification");
     desc = NULL;
     G_asprintf(&desc,
@@ -80,9 +80,11 @@ int main(int argc, char *argv[])
                "std;%s;"
                "qua;%s;"
                "equ;%s;"
-               "dis;%s",
+               "dis;%s;"
+               "jen;%s",
                _("simple intervals"), _("standard deviations"), _("quantiles"),
-               _("equiprobable (normal distribution)"), _("discontinuities"));
+               _("equiprobable (normal distribution)"), _("discontinuities"),
+               _("Jenks natural breaks"));
     algo_opt->descriptions = desc;
 
     nbclass_opt = G_define_option();
@@ -105,6 +107,8 @@ int main(int argc, char *argv[])
                                 "list;List of class breaks values;");
     format_opt->guisection = _("Print");
 
+    nprocs_opt = G_define_standard_option(G_OPT_M_NPROCS);
+
     breaks_flag = G_define_flag();
     breaks_flag->key = 'b';
     breaks_flag->description =
@@ -113,6 +117,10 @@ int main(int argc, char *argv[])
     G_gisinit(argv[0]);
     if (G_parser(argc, argv))
         exit(EXIT_FAILURE);
+
+    if (G_set_omp_num_threads(nprocs_opt) < 1)
+        G_fatal_error(_("<%s> is not valid number of nprocs."),
+                      nprocs_opt->answer);
 
     if (strcmp(format_opt->answer, "json") == 0) {
         format = JSON;
@@ -315,6 +323,8 @@ int main(int argc, char *argv[])
             if (G_strcasecmp(algo_opt->answer, "std") == 0)
                 fprintf(stdout, _("Stdev multiplied by %.4f to define step\n"),
                         finfo);
+            if (G_strcasecmp(algo_opt->answer, "jen") == 0)
+                fprintf(stdout, _("Goodness of variance fit = %f\n"), finfo);
             fprintf(stdout, "\n");
             fprintf(stdout, _("%15s%15s%15s\n\n"), "From (excl.)", "To (incl.)",
                     "Frequency");

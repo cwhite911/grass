@@ -57,6 +57,7 @@ int main(int argc, char **argv)
     struct Option *where_opt;
     struct Option *field_opt;
     struct Option *legend_file_opt;
+    struct Option *nprocs_opt;
     struct Option *icon_opt;
     struct Option *icon_line_opt;
     struct Option *icon_area_opt;
@@ -116,12 +117,13 @@ int main(int argc, char **argv)
     algo_opt->type = TYPE_STRING;
     algo_opt->required = NO;
     algo_opt->multiple = NO;
-    algo_opt->options = "int,std,qua,equ,dis";
+    algo_opt->options = "int,std,qua,equ,dis,jen";
     algo_opt->description = _("Algorithm to use for classification");
     desc = NULL;
-    G_asprintf(&desc, "int;%s;std;%s;qua;%s;equ;%s;dis;%s",
+    G_asprintf(&desc, "int;%s;std;%s;qua;%s;equ;%s;dis;%s;jen;%s",
                _("simple intervals"), _("standard deviations"), _("quantiles"),
-               _("equiprobable (normal distribution)"), _("discontinuities"));
+               _("equiprobable (normal distribution)"), _("discontinuities"),
+               _("Jenks natural breaks"));
     algo_opt->descriptions = desc;
     algo_opt->guisection = _("Classes");
 
@@ -215,6 +217,8 @@ int main(int argc, char **argv)
     legend_file_opt->required = NO;
     legend_file_opt->guisection = _("Legend");
 
+    nprocs_opt = G_define_standard_option(G_OPT_M_NPROCS);
+
     legend_flag = G_define_flag();
     legend_flag->key = 'l';
     legend_flag->description =
@@ -248,6 +252,10 @@ int main(int argc, char **argv)
     /* Check command line */
     if (G_parser(argc, argv))
         exit(EXIT_FAILURE);
+
+    if (G_set_omp_num_threads(nprocs_opt) < 1)
+        G_fatal_error(_("<%s> is not valid number of nprocs."),
+                      nprocs_opt->answer);
 
     if (algoinfo_flag->answer)
         G_warning(_("Flag -e is deprecated, set verbose mode with --v to get "

@@ -7,9 +7,9 @@ vector map. The user indicates the number of classes desired and the
 algorithm to use for classification.
 
 Several algorithms are implemented for classification: equal interval,
-standard deviation, quantiles, equal probabilities, and a discontinuities
+standard deviation, quantiles, equal probabilities, a discontinuities
 algorithm developed by Jean-Pierre Grimmeau at the Free University of
-Brussels (ULB).
+Brussels (ULB), and Jenks natural breaks.
 
 It can be used to pipe class breaks into thematic mapping modules such
 as <em>d.vect.thematic</em> (see example below);
@@ -55,6 +55,19 @@ simply distributing the sum of their frequencies amongst them in proportion
 to the class amplitudes. In the GRASS implementation, the algorithm
 continues, but a warning is printed.
 
+<p>The <em>Jenks natural breaks</em> algorithm finds the partition of
+the values into classes which minimizes the sum of the within-class
+variances (also known as Fisher-Jenks optimization or optimal univariate
+k-means). The result is the exact optimum, computed with a dynamic
+programming algorithm that runs in time proportional to the number of
+classes times n log n, parallelized with OpenMP (<b>nprocs</b>). The
+reported goodness of variance fit is
+<code>1 - SSD(classified) / SSD(unclassified)</code>; values close to 1
+indicate that the classes explain most of the variance. Each break is a
+value from the data, and a value belongs to the class whose break is the
+smallest break greater than or equal to it. If there are fewer distinct
+values than requested classes, the number of classes is reduced.
+
 <h2>EXAMPLE</h2>
 
 Classify column pop of map communes into 5 classes using quantiles:
@@ -82,8 +95,9 @@ d.vect.thematic -l map=communes2 column=pop/area \
 <h2>SEE ALSO</h2>
 
 <em>
-<a href="v.univar.html">v.univar</a>,
-<a href="d.vect.thematic.html">d.vect.thematic</a>
+<a href="d.vect.thematic.html">d.vect.thematic</a>,
+<a href="r.class.breaks.html">r.class.breaks</a>,
+<a href="v.univar.html">v.univar</a>
 </em>
 
 <h2>AUTHOR</h2>
