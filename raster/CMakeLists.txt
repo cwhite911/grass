@@ -5,6 +5,7 @@ set(raster_modules_list
     r.carve
     r.category
     r.circle
+    r.class.breaks
     r.clump
     r.coin
     r.colors
@@ -173,6 +174,17 @@ build_program_in_subdir(
 build_program_in_subdir(r.category DEPENDS grass_gis grass_raster grass_parson)
 
 build_program_in_subdir(r.circle DEPENDS grass_gis grass_raster)
+
+build_program_in_subdir(
+  r.class.breaks
+  DEPENDS
+  grass_gis
+  grass_raster
+  grass_arraystats
+  grass_parson
+  ${LIBM}
+  OPTIONAL_DEPENDS
+  OpenMP::OpenMP_C)
 
 build_program_in_subdir(r.clump DEPENDS grass_gis grass_raster grass_btree2)
 

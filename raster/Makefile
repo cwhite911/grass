@@ -7,6 +7,7 @@ SUBDIRS = \
 	r.carve \
 	r.category \
 	r.circle \
+	r.class.breaks \
 	r.clump \
 	r.coin \
 	r.colors \

@@ -1,0 +1,89 @@
+<h2>DESCRIPTION</h2>
+
+<em>r.class.breaks</em> computes class breaks for the cell values of a
+raster map, mainly for thematic mapping. Class breaks split the range of
+cell values into <b>nclasses</b> classes; the tool prints the breaks
+together with the number of cells falling into each class. The breaks
+can be computed with the following algorithms (<b>algorithm</b>):
+
+<ul>
+<li><code>jen</code>: Jenks natural breaks (default). Finds the
+partition of values minimizing the sum of within-class variances (also
+known as Fisher-Jenks optimization or optimal univariate k-means). The
+result is the exact optimum, computed with a dynamic programming
+algorithm that runs in time proportional to the number of classes times
+n log n, parallelized with OpenMP (<b>nprocs</b>). The reported goodness
+of variance fit is <code>1 - SSD(classified) / SSD(unclassified)</code>;
+values close to 1 indicate that the classes explain most of the
+variance.</li>
+<li><code>int</code>: equal intervals of size
+<code>(max - min) / nclasses</code>.</li>
+<li><code>qua</code>: quantiles, classes with approximately equal
+numbers of cells.</li>
+</ul>
+
+The tool reads the cell values into a histogram in a single pass, so
+memory consumption is independent of the raster size. For integer (CELL)
+maps whose value range does not exceed <b>bins</b>, the histogram holds
+every occurring value and the breaks are exact. Otherwise the values are
+binned into <b>bins</b> equal-width bins over the value range and each
+break is a bin center, i.e. accurate to
+<code>(max - min) / bins</code>; raise <b>bins</b> for more precision.
+
+<p>
+Breaks are values from the map (up to binning precision): a cell belongs
+to the class whose break is the smallest break greater than or equal to
+the cell value. The minimum and maximum are not part of the breaks.
+
+<p>
+With the <b>-b</b> flag only the breaks are printed, for use in scripts
+or as input to other tools. With the <b>-r</b> flag rules for
+<em>r.recode</em> are printed, mapping each class interval to its class
+number.
+
+<h2>NOTES</h2>
+
+The Jenks algorithm reduces the number of classes when the map has fewer
+distinct values (or occupied bins) than the requested classes.
+
+<p>
+This tool complements <em>v.class</em>, which computes class breaks for
+vector attribute data using the same classification library.
+
+<h2>EXAMPLES</h2>
+
+Compute five natural breaks classes for the elevation map (North
+Carolina sample dataset):
+
+<div class="code"><pre>
+g.region raster=elevation
+r.class.breaks input=elevation nclasses=5
+</pre></div>
+
+Print only the breaks in JSON format:
+
+<div class="code"><pre>
+r.class.breaks input=elevation nclasses=5 format=json -b
+</pre></div>
+
+Reclassify the map into five natural breaks classes with
+<em>r.recode</em>:
+
+<div class="code"><pre>
+r.class.breaks input=elevation nclasses=5 -r | r.recode input=elevation \
+    output=elevation_classes rules=-
+</pre></div>
+
+<h2>SEE ALSO</h2>
+
+<em>
+<a href="d.vect.thematic.html">d.vect.thematic</a>,
+<a href="r.quantile.html">r.quantile</a>,
+<a href="r.recode.html">r.recode</a>,
+<a href="r.stats.quantile.html">r.stats.quantile</a>,
+<a href="v.class.html">v.class</a>
+</em>
+
+<h2>AUTHORS</h2>
+
+Corey White, OpenPlains Inc.
