@@ -225,7 +225,8 @@ build_library_in_subdir(cdhc DEPENDS grass_gis grass_raster)
 
 build_library_in_subdir(stats DEPENDS grass_gis grass_raster ${LIBM})
 
-build_library_in_subdir(arraystats DEPENDS grass_gis ${LIBM})
+build_library_in_subdir(arraystats DEPENDS grass_gis ${LIBM} OPTIONAL_DEPENDS
+                        OpenMP::OpenMP_C)
 
 if(WITH_OPENGL)
   build_library_in_subdir(

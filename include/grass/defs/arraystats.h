@@ -15,4 +15,9 @@ double AS_class_stdev(const double[], int, int, double[]);
 int AS_class_equiprob(const double[], int, int *, double[]);
 int AS_class_frequencies(const double[], int, int, double[], int[]);
 
+/* jenks.c */
+double AS_class_jenks(const double[], int, int *, double[]);
+double AS_class_jenks_weighted(const double[], const double[], int, int *,
+                               double[]);
+
 #endif

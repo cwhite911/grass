@@ -26,6 +26,7 @@ struct GASTATS {
 #define CLASS_QUANT    3
 #define CLASS_EQUIPROB 4
 #define CLASS_DISCONT  5
+#define CLASS_JENKS    6
 
 #include <grass/defs/arraystats.h>
 

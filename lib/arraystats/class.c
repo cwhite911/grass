@@ -18,6 +18,8 @@ int AS_option_to_algorithm(const struct Option *option)
         return CLASS_EQUIPROB;
     if (G_strcasecmp(option->answer, "dis") == 0)
         return CLASS_DISCONT;
+    if (G_strcasecmp(option->answer, "jen") == 0)
+        return CLASS_JENKS;
 
     G_fatal_error(_("Unknown algorithm '%s'"), option->answer);
 }
@@ -45,6 +47,9 @@ double AS_class_apply_algorithm(int algo, const double data[], int nrec,
         break;
     case CLASS_DISCONT:
         finfo = AS_class_discont(data, nrec, *nbreaks, classbreaks);
+        break;
+    case CLASS_JENKS:
+        finfo = AS_class_jenks(data, nrec, nbreaks, classbreaks);
         break;
     default:
         break;
