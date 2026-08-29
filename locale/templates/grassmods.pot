@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-22 17:13+0000\n"
+"POT-Creation-Date: 2026-08-29 18:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18814,6 +18814,10 @@ msgid "Unexpected output from r.stats"
 msgstr ""
 
 #: ../raster/r.coin/make_coin.c:81
+msgid "No data returned from r.stats"
+msgstr ""
+
+#: ../raster/r.coin/make_coin.c:87
 msgid "Unable to open tempfile"
 msgstr ""
 
