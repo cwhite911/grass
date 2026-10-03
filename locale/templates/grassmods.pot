@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-26 18:44+0000\n"
+"POT-Creation-Date: 2026-10-03 18:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2320,7 +2320,7 @@ msgstr ""
 #: ../vector/v.generalize/main.c:332 ../vector/v.hull/main.c:119
 #: ../vector/v.in.ascii/main.c:249 ../vector/v.in.db/main.c:154
 #: ../vector/v.in.dxf/main.c:140 ../vector/v.in.lidar/main.c:562
-#: ../vector/v.in.ogr/main.c:867 ../vector/v.in.pdal/main.cpp:438
+#: ../vector/v.in.ogr/main.c:867 ../vector/v.in.pdal/main.cpp:471
 #: ../vector/v.in.region/main.c:71 ../vector/v.kernel/main.c:342
 #: ../vector/v.lidar.correction/main.c:214
 #: ../vector/v.lidar.correction/main.c:220
@@ -4211,7 +4211,7 @@ msgstr ""
 #: ../vector/v.in.ogr/main.c:343 ../vector/v.in.ogr/main.c:390
 #: ../vector/v.in.pdal/main.cpp:181 ../vector/v.in.pdal/main.cpp:189
 #: ../vector/v.in.pdal/main.cpp:198 ../vector/v.in.pdal/main.cpp:208
-#: ../vector/v.in.pdal/main.cpp:252 ../vector/v.net.allpairs/main.c:71
+#: ../vector/v.in.pdal/main.cpp:251 ../vector/v.net.allpairs/main.c:71
 #: ../vector/v.net.allpairs/main.c:77 ../vector/v.net.allpairs/main.c:80
 #: ../vector/v.net.allpairs/main.c:83 ../vector/v.net.centrality/main.c:117
 #: ../vector/v.net.centrality/main.c:119 ../vector/v.out.ascii/args.c:24
@@ -14100,7 +14100,7 @@ msgstr ""
 #: ../raster/r.external/main.c:100 ../raster/r.in.gdal/main.c:213
 #: ../raster/r.in.lidar/main.c:301 ../raster/r.in.pdal/main.cpp:411
 #: ../vector/v.external/args.c:48 ../vector/v.in.lidar/main.c:318
-#: ../vector/v.in.ogr/main.c:377 ../vector/v.in.pdal/main.cpp:223
+#: ../vector/v.in.ogr/main.c:377 ../vector/v.in.pdal/main.cpp:222
 msgid "Override projection check (use current project's CRS)"
 msgstr ""
 
@@ -19998,7 +19998,7 @@ msgstr ""
 #: ../raster/r.external/main.c:101 ../raster/r.in.gdal/main.c:214
 #: ../raster/r.in.lidar/main.c:303 ../raster/r.in.pdal/main.cpp:413
 #: ../raster3d/r3.in.lidar/main.c:290 ../vector/v.external/args.c:50
-#: ../vector/v.in.lidar/main.c:320 ../vector/v.in.pdal/main.cpp:225
+#: ../vector/v.in.lidar/main.c:320 ../vector/v.in.pdal/main.cpp:224
 msgid "Assume that the dataset has the same coordinate reference system as the current project"
 msgstr ""
 
@@ -21606,8 +21606,8 @@ msgstr ""
 #: ../raster/r.in.gdal/main.c:143 ../raster/r.in.gdal/main.c:216
 #: ../raster/r.in.gdal/main.c:222 ../raster/r.in.pdal/main.cpp:257
 #: ../raster/r.in.pdal/main.cpp:271 ../raster/r.in.pdal/main.cpp:415
-#: ../vector/v.in.pdal/main.cpp:218 ../vector/v.in.pdal/main.cpp:227
-#: ../vector/v.in.pdal/main.cpp:240 ../vector/v.info/print.c:779
+#: ../vector/v.in.pdal/main.cpp:217 ../vector/v.in.pdal/main.cpp:226
+#: ../vector/v.in.pdal/main.cpp:239 ../vector/v.info/print.c:779
 #: ../vector/v.info/print.c:783
 msgid "Projection"
 msgstr ""
@@ -21654,7 +21654,7 @@ msgid "Create the project specified by the \"project\" parameter and exit. Do no
 msgstr ""
 
 #: ../raster/r.in.gdal/main.c:263 ../vector/v.in.lidar/main.c:283
-#: ../vector/v.in.ogr/main.c:391 ../vector/v.in.pdal/main.cpp:253
+#: ../vector/v.in.ogr/main.c:391 ../vector/v.in.pdal/main.cpp:252
 msgid "Limit import to the current region"
 msgstr ""
 
@@ -22087,7 +22087,7 @@ msgstr ""
 
 #: ../raster/r.in.lidar/main.c:410 ../raster/r.in.pdal/main.cpp:516
 #: ../raster3d/r3.in.lidar/main.c:376 ../vector/v.in.lidar/main.c:347
-#: ../vector/v.in.pdal/main.cpp:266
+#: ../vector/v.in.pdal/main.cpp:271
 #, c-format
 msgid "Input file <%s> does not exist"
 msgstr ""
@@ -22391,7 +22391,7 @@ msgid "Cannot determine input file type of <%s>"
 msgstr ""
 
 #: ../raster/r.in.pdal/info.cpp:61 ../raster/r.in.pdal/info.cpp:273
-#: ../raster/r.in.pdal/main.cpp:871
+#: ../raster/r.in.pdal/main.cpp:871 ../vector/v.in.pdal/main.cpp:416
 #, c-format
 msgid "PDAL error: %s"
 msgstr ""
@@ -22442,19 +22442,19 @@ msgstr ""
 msgid "Use if output dimension is not Z or intensity"
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:253
+#: ../raster/r.in.pdal/main.cpp:253 ../vector/v.in.pdal/main.cpp:213
 msgid "Reproject to project's coordinate system if needed [deprecated]"
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:255
+#: ../raster/r.in.pdal/main.cpp:255 ../vector/v.in.pdal/main.cpp:215
 msgid "This flag is deprecated and will be removed in a future release. Input dataset will always be reprojected if needed."
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:267 ../vector/v.in.pdal/main.cpp:236
+#: ../raster/r.in.pdal/main.cpp:267 ../vector/v.in.pdal/main.cpp:235
 msgid "Input dataset projection (WKT or EPSG, e.g. EPSG:4326)"
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:269 ../vector/v.in.pdal/main.cpp:238
+#: ../raster/r.in.pdal/main.cpp:269 ../vector/v.in.pdal/main.cpp:237
 msgid "Override input dataset coordinate system using EPSG code or WKT definition"
 msgstr ""
 
@@ -22525,7 +22525,7 @@ msgstr ""
 msgid "Print data file extent in shell script style and then exit"
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:481
+#: ../raster/r.in.pdal/main.cpp:481 ../vector/v.in.pdal/main.cpp:266
 msgid "Flag 'w' is deprecated and will be removed in a future release. Input dataset will always be reprojected if needed."
 msgstr ""
 
@@ -22547,7 +22547,7 @@ msgstr ""
 msgid "PDAL reader creation failed, a wrong format of <%s>"
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:777
+#: ../raster/r.in.pdal/main.cpp:777 ../vector/v.in.pdal/main.cpp:362
 #, c-format
 msgid "PDAL error while reading <%s>: %s"
 msgstr ""
@@ -22556,19 +22556,19 @@ msgstr ""
 msgid "The input dataset has undefined projection"
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:809 ../vector/v.in.pdal/main.cpp:371
+#: ../raster/r.in.pdal/main.cpp:809 ../vector/v.in.pdal/main.cpp:351
 msgid "Overriding projection check and assuming that the CRS of input matches the project's CRS"
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:821 ../vector/v.in.pdal/main.cpp:349
+#: ../raster/r.in.pdal/main.cpp:821 ../vector/v.in.pdal/main.cpp:393
 msgid "Reprojecting the input to the project's CRS"
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:874 ../vector/v.in.pdal/main.cpp:386
+#: ../raster/r.in.pdal/main.cpp:874 ../vector/v.in.pdal/main.cpp:419
 msgid "Running PDAL algorithms..."
 msgstr ""
 
-#: ../raster/r.in.pdal/main.cpp:898 ../vector/v.in.pdal/main.cpp:432
+#: ../raster/r.in.pdal/main.cpp:898 ../vector/v.in.pdal/main.cpp:465
 msgid "Scanning points..."
 msgstr ""
 
@@ -27543,7 +27543,7 @@ msgid "Runoff infiltration rate unique value [mm/hr]"
 msgstr ""
 
 #: ../raster/r.sim/r.sim.water/main.c:184
-msgid "Name of flow controls raster map (permeability ratio 0-1)"
+msgid "Name of flow controls raster map (trapping probability 0-1)"
 msgstr ""
 
 #: ../raster/r.sim/r.sim.water/main.c:196
@@ -27595,77 +27595,77 @@ msgstr ""
 msgid "Processing block %d of %d"
 msgstr ""
 
-#: ../raster/r.sim/simlib/hydro.c:358
+#: ../raster/r.sim/simlib/hydro.c:357
 msgid "Unable to write raster maps"
 msgstr ""
 
-#: ../raster/r.sim/simlib/hydro.c:453
+#: ../raster/r.sim/simlib/hydro.c:452
 msgid "Cannot write raster maps"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:123
+#: ../raster/r.sim/simlib/input.c:121
 msgid "Manning's n raster map not found and manin_val undefined, choose one to be allowed to process"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:242
+#: ../raster/r.sim/simlib/input.c:240
 msgid "Zero value in Mannings n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:305
+#: ../raster/r.sim/simlib/input.c:303
 msgid "No values in the elevation raster."
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:340
+#: ../raster/r.sim/simlib/input.c:338
 #, c-format
 msgid ""
 "Min elevation \t= %.2f m\n"
 "Max elevation \t= %.2f m\n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:342
+#: ../raster/r.sim/simlib/input.c:340
 #, c-format
 msgid "Mean Source Rate (rainf. excess or sediment) \t= %f m/s or kg/m2s \n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:345
+#: ../raster/r.sim/simlib/input.c:343
 #, c-format
 msgid "Mean flow velocity \t= %f m/s\n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:349
+#: ../raster/r.sim/simlib/input.c:347
 #, c-format
 msgid "Mean Mannings \t= %f\n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:351
+#: ../raster/r.sim/simlib/input.c:349
 msgid "Mean Mannings \t= undefined (chmean is zero)\n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:355
+#: ../raster/r.sim/simlib/input.c:353
 #, c-format
 msgid "Number of iterations \t= %d cell\n"
 msgid_plural "Number of iterations \t= %d cells\n"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../raster/r.sim/simlib/input.c:358
+#: ../raster/r.sim/simlib/input.c:356
 #, c-format
 msgid "Time step \t= %.2f s\n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:360
+#: ../raster/r.sim/simlib/input.c:358
 #, c-format
 msgid ""
 "Sigmax \t= %f\n"
 "Max velocity \t= %f m/s\n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:361
+#: ../raster/r.sim/simlib/input.c:359
 #, c-format
 msgid "Time step used \t= %.2f s\n"
 msgstr ""
 
-#: ../raster/r.sim/simlib/input.c:412
+#: ../raster/r.sim/simlib/input.c:410
 msgid "Unable to write et file"
 msgstr ""
 
@@ -34444,40 +34444,40 @@ msgstr ""
 msgid "Unable to get reprojected map extent"
 msgstr ""
 
-#: ../scripts/r.import/r.import.py:388
+#: ../scripts/r.import/r.import.py:380
 msgid "Please check the 'extent' parameter"
 msgstr ""
 
-#: ../scripts/r.import/r.import.py:390 ../scripts/v.import/v.import.py:335
+#: ../scripts/r.import/r.import.py:382 ../scripts/v.import/v.import.py:335
 msgid "Unable to reproject to source project"
 msgstr ""
 
-#: ../scripts/r.import/r.import.py:410
+#: ../scripts/r.import/r.import.py:402
 #, python-brace-format
 msgid "Estimated target resolution for input band <{out}>: {res}"
 msgstr ""
 
-#: ../scripts/r.import/r.import.py:428
+#: ../scripts/r.import/r.import.py:420
 #, python-brace-format
 msgid "Using given resolution for input band <{out}>: {res}"
 msgstr ""
 
-#: ../scripts/r.import/r.import.py:438
+#: ../scripts/r.import/r.import.py:430
 #, python-brace-format
 msgid "Using current region resolution for input band <{out}>: nsres={ns}, ewres={ew}"
 msgstr ""
 
-#: ../scripts/r.import/r.import.py:444 ../scripts/v.import/v.import.py:384
+#: ../scripts/r.import/r.import.py:436 ../scripts/v.import/v.import.py:384
 #, python-format
 msgid "Reprojecting <%s>..."
 msgstr ""
 
-#: ../scripts/r.import/r.import.py:459
+#: ../scripts/r.import/r.import.py:451
 #, python-format
 msgid "Unable to to reproject raster <%s>"
 msgstr ""
 
-#: ../scripts/r.import/r.import.py:462
+#: ../scripts/r.import/r.import.py:454
 #, python-format
 msgid "The reprojected raster <%s> is empty"
 msgstr ""
@@ -39709,7 +39709,7 @@ msgstr ""
 #: ../vector/v.in.lidar/main.c:167 ../vector/v.in.lidar/main.c:175
 #: ../vector/v.in.pdal/main.cpp:145 ../vector/v.in.pdal/main.cpp:153
 #: ../vector/v.in.pdal/main.cpp:161 ../vector/v.in.pdal/main.cpp:169
-#: ../vector/v.in.pdal/main.cpp:248 ../vector/v.out.lidar/main.c:490
+#: ../vector/v.in.pdal/main.cpp:247 ../vector/v.out.lidar/main.c:490
 #: ../vector/v.out.lidar/main.c:497 ../vector/v.out.lidar/main.c:504
 #: ../vector/v.out.lidar/main.c:511
 msgid "Categories"
@@ -39789,11 +39789,11 @@ msgstr ""
 msgid "Invert mask when selecting points"
 msgstr ""
 
-#: ../vector/v.in.lidar/main.c:308 ../vector/v.in.pdal/main.cpp:245
+#: ../vector/v.in.lidar/main.c:308 ../vector/v.in.pdal/main.cpp:244
 msgid "Do not automatically add unique ID as category to each point"
 msgstr ""
 
-#: ../vector/v.in.lidar/main.c:309 ../vector/v.in.pdal/main.cpp:246
+#: ../vector/v.in.lidar/main.c:309 ../vector/v.in.pdal/main.cpp:245
 msgid "Create only requested layers and categories"
 msgstr ""
 
@@ -39815,7 +39815,7 @@ msgstr ""
 msgid "ID layer is required to store attribute table"
 msgstr ""
 
-#: ../vector/v.in.lidar/main.c:428 ../vector/v.in.pdal/main.cpp:296
+#: ../vector/v.in.lidar/main.c:428 ../vector/v.in.pdal/main.cpp:301
 #, c-format
 msgid "Storing generated point IDs as categories in the layer <%d>, consequently no more than %d points can be imported"
 msgstr ""
@@ -40445,27 +40445,28 @@ msgstr ""
 msgid "Converts LAS LiDAR point clouds to a GRASS vector map with PDAL."
 msgstr ""
 
-#: ../vector/v.in.pdal/main.cpp:213
-msgid "Reproject to projects's coordinate system if needed"
+#: ../vector/v.in.pdal/main.cpp:375
+#, c-format
+msgid "Invalid input_srs: %s"
 msgstr ""
 
-#: ../vector/v.in.pdal/main.cpp:215
-msgid "Reprojects input dataset to the coordinate system of the GRASS project (by default only datasets with the matching coordinate system can be imported"
+#: ../vector/v.in.pdal/main.cpp:390
+msgid "Unable to reproject the input because the current project has no CRS defined. Use the -o flag to import the data without reprojection."
 msgstr ""
 
-#: ../vector/v.in.pdal/main.cpp:404
+#: ../vector/v.in.pdal/main.cpp:437
 msgid "Cannot store return information because the input does not have a return dimensions"
 msgstr ""
 
-#: ../vector/v.in.pdal/main.cpp:416
+#: ../vector/v.in.pdal/main.cpp:449
 msgid "Cannot store class because the input does not have a classification dimension"
 msgstr ""
 
-#: ../vector/v.in.pdal/main.cpp:427
+#: ../vector/v.in.pdal/main.cpp:460
 msgid "Cannot store RGB colors because the input does not have a RGB dimensions"
 msgstr ""
 
-#: ../vector/v.in.pdal/main.cpp:444
+#: ../vector/v.in.pdal/main.cpp:477
 #, c-format
 msgid "Dataset doesn't have requested dimension '%s' with ID %d (possibly a programming error)"
 msgstr ""
